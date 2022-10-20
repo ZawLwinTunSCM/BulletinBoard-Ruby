@@ -1,0 +1,43 @@
+.container {
+  min-height: calc(100vh - 85px);
+}
+
+.left {
+  left: -90px;
+}
+
+label {
+  margin-bottom: 0 !important;
+}
+
+img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.image,
+fieldset {
+  width: 50%;
+}
+
+.detail {
+  width: 70%;
+}
+
+.image,
+fieldset,
+.detail {
+  margin: 0 auto;
+}
+
+.msg{
+  position: absolute;
+  top: 18%;
+  right: 10.2%;
+  text-align: right;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+}

@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <%= form_with model: @user do |form| %>
+      <div class="text-center image">
+        <img id="image">
+        <% if @user.profile.present? && !@user.errors.any? %>
+          <%= image_tag @user.profile, id: "profile" %>
+        <% end %>
+      </div>
+      <div class="custom-file mt-2">
+        <%= form.label :profile, class: "custom-file-label", id: "fileLabel" %>
+        <%= form.file_field :profile, class: "custom-file-input", accept: "image/*" %>
+        <% if @user.errors[:profile].any? %>
+          <div class="text-danger">Profile <%= @user.errors[:profile][0] %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :name, class: "required" %>
+        <%= form.text_field :name, class: "form-control", placeholder: "John Doe" %>
+        <% if @user.errors[:name].any? %>
+          <div class="text-danger">Name <%= @user.errors[:name][0] %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :email, class: "required" %>
+        <%= form.email_field :email, class: "form-control", placeholder: "xxx@gmail.com" %>
+        <% if @user.errors[:email].any? %>
+          <div class="text-danger">Email <%= @user.errors[:email][0] %></div>
+        <% end %>
+      </div>
+      <% if !@user.id.present? %>
+        <div class="mt-2">
+          <%= form.label :password, class: "required" %>
+          <%= form.password_field :password, class: "form-control", placeholder: "Enter Password" %>
+          <% if @user.errors[:password].any? %>
+            <div class="text-danger">Password <%= @user.errors[:password][0] %></div>
+          <% end %>
+        </div>
+        <div class="mt-2">
+          <%= form.label :password_confirmation, "Confirm Password" , class: "required" %>
+          <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Enter Password Again" %>
+          <% if @user.errors[:password_confirmation].any? %>
+            <div class="text-danger">Confirm Password <%= @user.errors[:password_confirmation][0] %></div>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="mt-2">
+        <%= form.label :phone,"Phone Number", class: "required" %>
+        <%= form.text_field :phone, class: "form-control", placeholder: "09xxxxxxxxx" %>
+        <% if @user.errors[:phone].any? %>
+          <div class="text-danger">Phone Number <%= @user.errors[:phone][0] %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :address %>
+        <%= form.text_field :address, class: "form-control", placeholder: "Enter Address" %>
+        <% if @user.errors[:address].any? %>
+          <div class="text-danger">Address <%= @user.errors[:address][0] %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :birthday %>
+        <%= form.date_field :birthday, class: "form-control"%>
+        <% if @user.errors[:birthday].any? %>
+          <div class="text-danger">Birthday <%= @user.errors[:birthday][0] %></div>
+        <% end %>
+      </div>
+      <% if !@user.id.present? || current_user.admin_flg %>
+      <div class="d-flex mt-2">
+        <%= form.label :admin_flg, "Create as : " , class: "required mr-3" %>
+        <%= form.radio_button :admin_flg, true %>
+        <%= form.label :admin_flg, "Admin", value: "true", class: "mr-3" %>
+        <%= form.radio_button :admin_flg, false %>
+        <%= form.label :admin_flg, "User",  value: "false" %>
+      </div>
+      <% end %>
+      <% if @user.errors[:admin_flg].any? %>
+        <div class="text-danger">User Type <%= @user.errors[:admin_flg][0] %></div>
+      <% end %>
+      <div class="text-center py-3">
+        <%= form.submit class: "btn btn-primary mr-2" %>
+        <%= link_to "Back", users_path, class: "btn btn-dark ml-2" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4"></div>
+</div>

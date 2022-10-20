@@ -1,0 +1,8 @@
+<h3>Hello <%= params[:user].name %>, </h3>
+<p>A request has been recieved to change your password for your BulletinBoard account.<br>
+Click the link to reset your password.<br>
+The link will automatically expire in 15minutes.</p>
+<%= link_to "Reset Password", reset_password_url(token: @token)%>
+<p>If you didn't request to reset your password, you could ignore this email.<br>
+Your password will not be changed.</p>
+<i><b>BulletinBoard Team</b></i>

@@ -1,0 +1,50 @@
+<h1>User List</h1>
+<% if !@users.empty? %>
+  <div class="row my-3">
+    <div class="col-md-4">
+      <% if current_user.admin_flg %>
+        <%= link_to "Add New User", new_user_path, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <%= form_with model: @user, method: :GET, class: "d-flex" do |form| %>
+        <%= form.text_field :name, class: "form-control mr-2", placeholder: "Search By Name", value: params[:name] %>
+        <%= form.submit "Search", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr class="text-center">
+      <th>No</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Birthday</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @users.empty? %>
+      <tr>
+        <td colspan="7" class="text-center">You Don't Have Any User Yet. Add New User <%= link_to "Here", new_user_path %></td>
+      </tr>
+    <% else %>
+      <% @users.each.with_index do |user, index| %>
+        <tr>
+          <td class="text-center"><%= index+1 %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td class="text-right"><%= user.phone %></td>
+          <td><%= user.address == "" || user.address == nil ? "~" : user.address %></td>
+          <td><%= user.address == "" || user.birthday == nil ? "~" : user.birthday %></td>
+          <td class="text-center"><%= link_to "Detail", user_path(user.id), class: "btn btn-info" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
