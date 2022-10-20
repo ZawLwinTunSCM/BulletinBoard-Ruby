@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.created_user = current_user.id
     @is_save = UserService.createUser(@user)
     if @is_save
         redirect_to users_path
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
 
   def update
     @user = UserService.getUserByID(params[:id])
+    @user.updated_user = current_user.id
     @is_user_update = UserService.updateUser(@user, user_params)
     if @is_user_update
       redirect_to users_path
@@ -78,7 +80,7 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit( :name, :email, :password, :password_confirmation, :phone,
-     :address, :birthday,:profile, :admin_flg)
+     :address, :birthday,:profile, :admin_flg, :created_user, :updated_user)
   end
   
 end

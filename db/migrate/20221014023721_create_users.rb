@@ -9,10 +9,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.date :birthday
       t.string :profile
       t.boolean :admin_flg
-      t.datetime :deleted_at
       t.numeric :created_user
       t.numeric :updated_user
-      t.numeric :deleted_user
 
       t.timestamps
     end
