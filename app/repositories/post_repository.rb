@@ -18,16 +18,22 @@ class PostRepository
       end 
   
       def filter(select,current_user)
-        if select == "all"
-          if current_user.admin_flg
-            @posts = Post.all.order("created_at DESC")
-          else 
-            @posts = Post.where(public_flg: true).or (Post.where(created_user: current_user.id))
+        if current_user.admin_flg
+         if select == "all"
+          @posts = Post.all          
+         elsif select == "my"
+          @posts = Post.where(created_user: current_user.id)
+         elsif  select == "other"
+          @posts = Post.where("created_user <> ?", current_user.id)          
+         end
+        else 
+          if select == "all"
+            @posts = Post.where(public_flg: true).or (Post.where(created_user: current_user.id))     
+          elsif select == "my"
+           @posts = Post.where(created_user: current_user.id)
+          elsif  select == "other"
+           @posts = Post.where(public_flg: true).or (Post.where("created_user <> ?", current_user.id))       
           end
-        elsif select == "my"
-           @posts = Post.where(created_user: current_user.id).order("created_at DESC")
-        elsif select == "other"
-          @posts = Post.where("created_user <> ?", current_user.id).order("created_at DESC")
         end
       end
       

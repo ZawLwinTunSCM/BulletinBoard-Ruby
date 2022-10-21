@@ -58,17 +58,10 @@ class PostsController < ApplicationController
   end
 
   def download_csv
-    if params[:search].present?
-     @posts = PostService.search(params[:search],params[:select],current_user)
-    elsif params[:select].present?
-     @posts = PostService.filter(params[:select],current_user)
-    else
-     @posts = PostService.filter("all",current_user)
-    end
-    @posts = @posts.reorder('id ASC')
+    @posts = PostService.filter("all",current_user).reorder('id ASC')
     respond_to do |format|
       format.html
-      format.csv { send_data @posts.to_csv,:filename => "Posts-#{Date.today}.csv" }
+      format.csv { send_data @posts.to_csv(@posts),:filename => "Posts-#{Date.today}.csv" }
     end
   end
 

@@ -11,7 +11,7 @@
       <%= form.select :select, options_for_select([["All", "all"], ["Other Posts", "other"], ["My Posts", "my"]], selected: params[:select]), {}, { class: "custom-select w-auto" } %>
     </div>
     <div class="col-md-1">
-    <%= link_to "<i class='fa-solid fa-file-arrow-down'></i>".html_safe, download_csv_path(format: :csv) , class: "csv mr-2", :data => {:toggle=>"tooltip"}, 'data-original-title' => "Download CSV FIle", 'data-placement' => 'top' %>
+      <%= link_to "<i class='fa-solid fa-file-arrow-down'></i>".html_safe, download_csv_path(format: :csv) , class: "csv mr-2", :data => {:toggle=>"tooltip"}, 'data-original-title' => "Download CSV FIle", 'data-placement' => 'top' %>
       <%= link_to "<i class='fa-solid fa-file-arrow-up'></i>".html_safe, upload_csv_path , class: "csv ml-2", :data => {:toggle=>"tooltip"}, 'data-original-title' => "Upload CSV FIle", 'data-placement' => 'top' %>
     </div>
     <div class="col-md-4 d-flex">
@@ -23,14 +23,14 @@
 <table class="table table-bordered">
   <thead class="thead-dark">
     <tr class="text-center">
-      <th>No</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Author</th>
-      <% if current_user.admin_flg %>
-        <th>Status</th>
-      <% end %>
-      <th>Action</th>
+      <th class="no-sort">No</th>
+      <th class="no-sort">Title</th>
+      <th class="no-sort">Description</th>
+      <th class="no-sort">Author</th>
+      <th class="no-sort">Status</th>
+      <th>Created At</th>
+      <th class="no-sort">Updated At</th>
+      <th class="no-sort">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -43,13 +43,13 @@
     <% else %>
       <% @posts.each.with_index do |post, index| %>
         <tr>
-          <td class="text-center"><%= index+1 %></td>
+          <td class="text-center"><%= @posts.size-index %></td>
           <td><%= post.title %></td>
           <td><%= post.description %></td>
           <td><%= post.user.name %></td>
-          <% if current_user.admin_flg %>
-            <td><%= post.public_flg ? "Public" : "Private" %></td>
-          <% end %>
+          <td><%= post.public_flg ? "Public" : "Private" %></td>
+          <td><%= post.created_at.strftime("%Y-%m-%d %I:%M:%S %p") %></td>
+          <td><%= post.updated_at.strftime("%Y-%m-%d %I:%M:%S %p") %></td>
           <td class="text-center"><%= link_to "Detail", post_path(post.id), class: "btn btn-info" %></td>
         </tr>
       <% end %>

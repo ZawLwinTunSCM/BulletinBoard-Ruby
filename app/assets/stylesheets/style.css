@@ -30,8 +30,18 @@ fieldset,
   margin: 0 auto;
 }
 
-.csv{
+.csv {
   font-size: 25px;
+}
+
+.required:after {
+  content: "*";
+  color: red;
+  margin-left: 3px;
+}
+
+.dataTables_length {
+  margin-bottom: 5px;
 }
 
 .footer {
