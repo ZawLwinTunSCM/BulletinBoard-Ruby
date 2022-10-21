@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div class="custom-file mt-2">
-        <%= form.label :profile, class: "custom-file-label", id: "fileLabel" %>
+        <%= form.label :profile, class: "custom-file-label", id: "profileLabel" %>
         <%= form.file_field :profile, class: "custom-file-input", accept: "image/*" %>
         <% if @user.errors[:profile].any? %>
           <div class="text-danger">Profile <%= @user.errors[:profile][0] %></div>

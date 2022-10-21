@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <%= form_with model: @post do |form| %>
+      <div class="mt-2">
+        <%= form.label :title, class: "required" %>
+        <%= form.text_field :title, class: "form-control", placeholder: "Enter Title" %>
+        <% if @post.errors[:title].any? %>
+          <div class="text-danger">Title <%= @post.errors[:title][0] %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :description, class: "required" %>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter Description" %>
+        <% if @post.errors[:description].any? %>
+          <div class="text-danger">Description <%= @post.errors[:description][0] %></div>
+        <% end %>
+      </div>
+      <div class="d-flex mt-2">
+        <%= form.label :public_flg, "Status : " , class: "required mr-3" %>
+        <%= form.radio_button :public_flg, false %>
+        <%= form.label :public_flg, "Private", value: "false", class: "mr-3" %>
+        <%= form.radio_button :public_flg, true %>
+        <%= form.label :public_flg, "Public",  value: "true" %>
+      </div>
+      <% if @post.errors[:public_flg].any? %>
+        <div class="text-danger">Status <%= @post.errors[:public_flg][0] %></div>
+      <% end %>
+      <div class="text-center py-3">
+        <%= form.submit class: "btn btn-primary mr-2" %>
+        <%= link_to "Back", posts_path, class: "btn btn-dark ml-2" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4"></div>
+</div>

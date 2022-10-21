@@ -1,5 +1,5 @@
 <fieldset class="form-group border p-15">
-  <legend class="text-center w-auto pt-5 pb-3">
+  <legend class="text-center w-auto pt-3 pb-3">
     <h2><%= @user.name == current_user.name ? "My " : "#{@user.name}'s"  %> Detail</h2>
   </legend>
   <div class="detail">
@@ -26,11 +26,11 @@
     </div>
     <div class="form-group row">
       <label class="col-md-4 col-form-label">Address</label>
-      <input type="text" value="<%= @user.address == "" ? "~" : @user.address %>" class="form-control col-md-8" readonly>
+      <input type="text" value="<%= @user.address == "" || @user.address == nil ? "~" : @user.address %>" class="form-control col-md-8" readonly>
     </div>
     <div class="form-group row">
       <label class="col-md-4 col-form-label">Birthday</label>
-      <input type="text" value="<%= @user.birthday == nil ? "~" : @user.birthday %>" class="form-control col-md-8" readonly>
+      <input type="text" value="<%= @user.birthday == "" || @user.birthday == nil ? "~" : @user.birthday %>" class="form-control col-md-8" readonly>
     </div>
     <div class="form-group row">
       <label class="col-md-4 col-form-label">Type</label>

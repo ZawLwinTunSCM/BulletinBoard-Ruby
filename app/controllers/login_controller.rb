@@ -18,7 +18,7 @@ class LoginController < ApplicationController
       user = UserService.findByEmail(params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
        session[:user_id] = user.id
-       redirect_to users_path
+       redirect_to posts_path
       else 
         redirect_to login_path, notice: "Invalid Email Or Password."
       end

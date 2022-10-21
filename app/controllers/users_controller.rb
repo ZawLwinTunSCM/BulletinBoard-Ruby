@@ -16,10 +16,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.created_user = current_user.id
+    @user.created_user ||= current_user.id
     @is_save = UserService.createUser(@user)
     if @is_save
-        redirect_to users_path
+        redirect_to users_path, notice: 'User Created Successfully'
     else
       render :new
     end
@@ -39,10 +39,10 @@ class UsersController < ApplicationController
 
   def update
     @user = UserService.getUserByID(params[:id])
-    @user.updated_user = current_user.id
+    @user.updated_user ||= current_user.id
     @is_user_update = UserService.updateUser(@user, user_params)
     if @is_user_update
-      redirect_to users_path
+      redirect_to users_path, notice: 'User Updated Successfully'
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   def destroy
     @user = UserService.getUserByID(params[:id])
     UserService.destroyUser(@user)
-    redirect_to users_path
+    redirect_to users_path, notice: 'User Deleted Successfully'
   end
 
   def edit_password
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
       @user = current_user
       @is_update_password = UserService.updatePassword(@user, params[:password])
       if @is_update_password
-        redirect_to users_path
+        redirect_to users_path, notice: 'Password Changed Successfully'
       end
     end
   end

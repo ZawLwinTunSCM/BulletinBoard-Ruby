@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   post 'email_check', to: 'password_reset#email_check'
   get 'reset_password', to: 'password_reset#reset_password'
   post 'reset_password', to: 'password_reset#update_password'
+
+  #post
+  resources :posts
+  get 'download_csv', to: 'posts#download_csv'
+  get 'upload_csv', to: 'posts#upload_csv'
+  post 'import_csv', to: 'posts#import_csv'
 end

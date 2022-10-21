@@ -30,11 +30,8 @@ fieldset,
   margin: 0 auto;
 }
 
-.msg{
-  position: absolute;
-  top: 18%;
-  right: 10.2%;
-  text-align: right;
+.csv{
+  font-size: 25px;
 }
 
 .footer {

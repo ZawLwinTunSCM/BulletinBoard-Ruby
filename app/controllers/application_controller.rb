@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login?
-    redirect_to users_path if current_user
+    redirect_to posts_path if current_user
   end
 
   def isCurrentUser(id)

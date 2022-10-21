@@ -1,4 +1,7 @@
 <h1>User List</h1>
+<% if notice %>
+  <div class="text-success"> <%= notice %> </div>
+<% end %>
 <% if !@users.empty? %>
   <div class="row my-3">
     <div class="col-md-4">
@@ -25,6 +28,9 @@
       <th>Phone</th>
       <th>Address</th>
       <th>Birthday</th>
+      <% if current_user.admin_flg %>
+        <th>User Type</th>
+      <% end %>
       <th>Action</th>
     </tr>
   </thead>
@@ -41,7 +47,10 @@
           <td><%= user.email %></td>
           <td class="text-right"><%= user.phone %></td>
           <td><%= user.address == "" || user.address == nil ? "~" : user.address %></td>
-          <td><%= user.address == "" || user.birthday == nil ? "~" : user.birthday %></td>
+          <td><%= user.birthday == "" || user.birthday == nil ? "~" : user.birthday %></td>
+          <% if current_user.admin_flg %>
+            <td><%= user.admin_flg ? "Admin" : "User" %></td>
+          <% end %>
           <td class="text-center"><%= link_to "Detail", user_path(user.id), class: "btn btn-info" %></td>
         </tr>
       <% end %>

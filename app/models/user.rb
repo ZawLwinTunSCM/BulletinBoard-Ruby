@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
     has_one_attached :profile
 
+    has_many :posts, dependent: :destroy
+
     before_save :email.downcase
 
     validates :name, presence: { message: " cannot be empty!" }, length: { minimum: 3, maximum: 100}
