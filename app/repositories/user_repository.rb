@@ -2,7 +2,7 @@ class UserRepository
   class << self
     
     def list(id)
-      @users = User.where("id <> ?", "#{id}").order("id ASC");
+      @users = User.where.not(id: "#{id}").order("id ASC");
     end
     
     def createUser(user)
